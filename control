@@ -1,0 +1,9 @@
+Package: com.nahtedetihw.artfull
+Name: ArtFull
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Make the Apple Music app look like iOS 17!
+Maintainer: Ethan Whited
+Author: Ethan Whited
+Section: Tweaks
+Depends: 
