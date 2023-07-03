@@ -1,4 +1,4 @@
-<p align="center" width="100%"><img width="15%" src="https://i.ibb.co/mRCj4vF/Art-Full-Icon.png"></p>
+<p align="center" width="100%"><img width="15%" height="15%" src="https://i.ibb.co/mRCj4vF/Art-Full-Icon.png"></p>
 
 <p align="center"><b><font size="40">ArtFull</font></b></p>
 
