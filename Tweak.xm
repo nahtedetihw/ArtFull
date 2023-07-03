@@ -197,7 +197,6 @@ UIImageView *artfullMusicView;
     } else {
         self.elapsedTrack.frame = CGRectMake(elapsedTrackOrigFrame.origin.x,elapsedTrackOrigFrame.origin.y,elapsedTrackOrigFrame.size.width,elapsedTrackOrigFrame.size.height+5);
     }
-    self.elapsedTrack.layer.masksToBounds = YES;
     self.elapsedTrack.layer.cornerRadius = self.elapsedTrack.frame.size.height/2;
     self.elapsedTrack.layer.masksToBounds = YES;
     self.elapsedTrack.clipsToBounds = YES;
@@ -208,7 +207,6 @@ UIImageView *artfullMusicView;
     } else {
         self.remainingTrack.frame = CGRectMake(remainingTrackOrigFrame.origin.x,remainingTrackOrigFrame.origin.y,remainingTrackOrigFrame.size.width,remainingTrackOrigFrame.size.height+5);
     }
-    self.remainingTrack.layer.masksToBounds = YES;
     self.remainingTrack.layer.cornerRadius = self.remainingTrack.frame.size.height/2;
 
     self.remainingTrack.layer.masksToBounds = YES;
