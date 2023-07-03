@@ -1,9 +1,9 @@
-<p align="center" width="100%"><img width="15%" src="https://i.ibb.co/CH9dHgP/Art-Full-Banner.png"></p>
+<p align="center" width="100%"><img width="15%" src="https://i.ibb.co/mRCj4vF/Art-Full-Icon.png"></p>
 
 <p align="center"><b><font size="40">ArtFull</font></b></p>
 
 
-<p align="center" width="100%"><img width="80%" src="https://i.ibb.co/mRCj4vF/Art-Full-Icon.png"></p>
+<p align="center" width="100%"><img width="80%" src="https://i.ibb.co/CH9dHgP/Art-Full-Banner.png"></p>
 
 # ArtFull
 ### Make the Apple Music app look like iOS 17!
