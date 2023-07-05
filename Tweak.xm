@@ -224,9 +224,9 @@ UIImageView *artfullMusicView;
         self.elapsedTrack.layer.cornerRadius = self.elapsedTrack.frame.size.height/2;
         self.remainingTrack.layer.cornerRadius = self.remainingTrack.frame.size.height/2;
         self.elapsedTrack.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.70];
-        self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.8);
-        elapsedTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.6);
-        remainingTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.6);
+        self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.5);
+        elapsedTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0.7);
+        remainingTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0.7);
     } completion:nil];
 }
 
@@ -318,15 +318,18 @@ UIImageView *artfullMusicView;
     UIView *minTrackView = MSHookIvar<UIView *>(visualElement, "_minTrackView");
     UIView *maxTrackView = MSHookIvar<UIView *>(visualElement, "_maxTrackView");
     minTrackView.layer.cornerRadius = minTrackView.frame.size.height/2;
-    if (self.value == 1.0) {
+    maxTrackView.layer.cornerRadius = maxTrackView.frame.size.height/2;
+    if (self.value >= 0.985) {
         minTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
+        maxTrackView.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
+    } else if (self.value <= 0.008) {
+        minTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner;
+        maxTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
     } else {
         minTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner;
+        maxTrackView.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
     }
     minTrackView.clipsToBounds = YES;
-
-    maxTrackView.layer.cornerRadius = maxTrackView.frame.size.height/2;
-    maxTrackView.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
     maxTrackView.clipsToBounds = YES;
     
     self.thumbView.hidden = YES;
@@ -341,7 +344,7 @@ UIImageView *artfullMusicView;
         minValueImageView.hidden = YES;
         maxValueImageView.hidden = YES;
         self.minimumTrackTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.70];
-        visualElement.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2, 1.8);
+        visualElement.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.5);
     } completion:nil];
 }
 
@@ -458,15 +461,14 @@ UIImageView *artfullMusicView;
 
 %new
 - (void)setMaskedCornersForSlider {
-    UILabel *elapsedTimeLabel = MSHookIvar<UILabel *>(self, "_elapsedTimeLabel");
     CGFloat elapsedTimeFactor = MSHookIvar<CGFloat>(self, "_elapsedTimeFactor");
     
-    if ([elapsedTimeLabel.text isEqual:@"0:00"]) {
-        self.elapsedTrack.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
+    if (elapsedTimeFactor <= 0.008) {
+        self.elapsedTrack.layer.maskedCorners = self.elapsedTrack.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner;
         self.remainingTrack.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
-    } else if (elapsedTimeFactor == 1) {
-        self.remainingTrack.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
+    } else if (elapsedTimeFactor >= 0.985) {
         self.elapsedTrack.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
+        self.remainingTrack.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
     } else {
         self.elapsedTrack.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner;
         self.remainingTrack.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
@@ -478,9 +480,9 @@ UIImageView *artfullMusicView;
     UIView *elapsedTimeLabel = MSHookIvar<UIView *>(self, "_elapsedTimeLabel");
     UIView *remainingTimeLabel = MSHookIvar<UIView *>(self, "_remainingTimeLabel");
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.2 options:nil animations:^{
-        self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.8);
-        elapsedTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.6);
-        remainingTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.6);
+        self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.5);
+        elapsedTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0.7);
+        remainingTimeLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 0.7);
     } completion:nil];
 }
 
@@ -569,15 +571,18 @@ UIImageView *artfullMusicView;
     UIView *minTrackView = MSHookIvar<UIView *>(visualElement, "_minTrackView");
     UIView *maxTrackView = MSHookIvar<UIView *>(visualElement, "_maxTrackView");
     minTrackView.layer.cornerRadius = minTrackView.frame.size.height/2;
-    if (self.value == 1.0) {
+    maxTrackView.layer.cornerRadius = maxTrackView.frame.size.height/2;
+    if (self.value >= 0.985) {
         minTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
+        maxTrackView.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
+    } else if (self.value <= 0.008) {
+        minTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner;
+        maxTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
     } else {
         minTrackView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner;
+        maxTrackView.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
     }
     minTrackView.clipsToBounds = YES;
-
-    maxTrackView.layer.cornerRadius = maxTrackView.frame.size.height/2;
-    maxTrackView.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner;
     maxTrackView.clipsToBounds = YES;
     
     self.thumbView.hidden = YES;
@@ -594,7 +599,7 @@ UIImageView *artfullMusicView;
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0.2 options:nil animations:^{
         minValueImageView.hidden = YES;
         maxValueImageView.hidden = YES;
-        visualElement.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.2, 1.8);
+        visualElement.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.5);
     } completion:nil];
 }
 
