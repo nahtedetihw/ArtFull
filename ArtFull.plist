@@ -3,6 +3,7 @@
 		Bundles = (
 			"com.apple.Music",
 			"com.apple.springboard",
+			"com.apple.podcasts",
 		);
 	};
 }
